@@ -1,7 +1,7 @@
 require 'open3'
 require_relative '../utils/builder'
 
-name = "fnproject/mono"
+name = get_project_name("mono")
 
 tag = "latest"
 build("#{name}:#{tag}")

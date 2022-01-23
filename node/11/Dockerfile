@@ -1,4 +1,6 @@
 FROM node:11-alpine
+ARG REPO_URL
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 RUN deluser --remove-home node \
   && addgroup -S node -g 1001 \

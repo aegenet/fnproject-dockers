@@ -1,7 +1,7 @@
 require 'open3'
 require_relative '../utils/builder'
 
-name = "#{ENV['REG'] || 'fnproject'}/dep"
+name = get_project_name("dep")
 
 tag = "latest"
 tags = [tag]

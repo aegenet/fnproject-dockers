@@ -1,7 +1,7 @@
 require 'open3'
 require_relative '../utils/builder'
 
-name = "fnproject/erlang"
+name = get_project_name("erlang")
 
 tag = "latest"
 build("#{name}:#{tag}")

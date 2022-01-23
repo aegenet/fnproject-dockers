@@ -1,4 +1,8 @@
-FROM fnproject/erlang
+ARG REG
+ARG PREFIX_NAME
+FROM ${REG}/${PREFIX_NAME}erlang
+ARG REPO_URL
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 # Env
 ENV REBAR_VERSION 3.3.6

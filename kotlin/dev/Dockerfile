@@ -1,4 +1,8 @@
-FROM fnproject/java:1.8
+ARG REG
+ARG PREFIX_NAME
+FROM ${REG}/${PREFIX_NAME}java:1.8
+ARG REPO_URL
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 ENV KOTLIN_COMPILER_URL=https://github.com/JetBrains/kotlin/releases/download/v1.2.0/kotlin-compiler-1.2.0.zip
 

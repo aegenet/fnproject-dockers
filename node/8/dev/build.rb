@@ -1,7 +1,8 @@
 # TODO: copy the build.rb file from ruby and update this. And move into parent dir. 
 require 'open3'
+require_relative '../../utils/builder'
 
-base = 'fnproject/node'
+base = get_project_name("node")
 name = "#{base}:8-dev"
 
 # TEMP: using mhart version

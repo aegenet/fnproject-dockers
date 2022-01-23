@@ -1,12 +1,10 @@
 require 'open3'
 require_relative '../utils/builder'
 
-reg = ENV['REG'] || 'fnproject'
-
 stream_exec('docker pull alpine')
 stream_exec('docker pull alpine:edge')
  
-name = "#{reg}/base"
+name = get_project_name("base")
 
 tag = "latest"
 build("#{name}:#{tag}")

@@ -1,4 +1,8 @@
-FROM fnproject/base
+ARG REG
+ARG PREFIX_NAME
+FROM ${REG}/${PREFIX_NAME}base
+ARG REPO_URL
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
   && echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \

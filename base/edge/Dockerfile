@@ -1,4 +1,6 @@
 FROM alpine:edge
+ARG REPO_URL
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 RUN apk update && apk upgrade \
   && apk add ca-certificates \

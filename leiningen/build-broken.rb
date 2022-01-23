@@ -1,7 +1,7 @@
 require 'open3'
 require_relative '../utils/builder'
 
-name = "fnproject/leiningen"
+name = get_project_name("leiningen")
 
 tag = "latest"
 build("#{name}:#{tag}")

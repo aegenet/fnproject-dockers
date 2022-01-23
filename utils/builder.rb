@@ -14,7 +14,11 @@ def stream_exec(cmd)
   puts "Executing cmd: #{cmd}"
   exit_status = nil
   last_line = ""
-  Open3.popen2e({"REG" => "fnproject"}, cmd) do |stdin, stdout_stderr, wait_thread|
+  Open3.popen2e({
+    "REG" => ENV["FN_DOCKER_REGISTRY"],
+    "FN_DOCKER_REGISTRY" => ENV["FN_DOCKER_REGISTRY"],
+    "FN_DOCKER_PREFIX_NAME" => ENV["FN_DOCKER_PREFIX_NAME"]
+  }, cmd) do |stdin, stdout_stderr, wait_thread|
     stdout_stderr.each {|l| 
       puts l
       # Save last line for error checking
@@ -29,7 +33,7 @@ end
 
 def build(name)
   puts "Building #{name}..." 
-  cmd = "docker build --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg REG=fnproject -t #{name} ."
+  cmd = "docker build --build-arg REPO_URL=#{ENV["FN_REPO_URL"] || "https://github.com/fnproject/dockers"} --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg REG=#{ENV["FN_DOCKER_REGISTRY"] || "fnproject"} --build-arg PREFIX_NAME=#{ENV["FN_DOCKER_PREFIX_NAME"] || ""} -t #{name} ."
 
   stream_exec(cmd)
 end
@@ -57,5 +61,16 @@ def push_all(name, tags)
     fullname = "#{name}:#{t}"
     puts "Pushing #{fullname}"
     status = stream_exec("docker push #{fullname}")
+  end
+end
+
+# get full project name
+def get_project_name(name)
+  namePrefixed = (ENV["FN_DOCKER_PREFIX_NAME"] ? ENV["FN_DOCKER_PREFIX_NAME"] : "") + name
+
+  if ENV["FN_DOCKER_REGISTRY"]
+    return ENV["FN_DOCKER_REGISTRY"] + '/' + namePrefixed
+  else
+    return "fnproject/#{namePrefixed}"
   end
 end

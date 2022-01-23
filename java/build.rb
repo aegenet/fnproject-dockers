@@ -2,7 +2,7 @@
 require 'open3'
 require_relative '../utils/builder'
 
-name = "fnproject/java"
+name = get_project_name("java")
 new_tags = []
 
 # now 1.8

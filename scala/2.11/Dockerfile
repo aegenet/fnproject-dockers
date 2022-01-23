@@ -1,4 +1,8 @@
-FROM fnproject/java:1.8
+ARG REPO_URL
+ARG REG
+ARG PREFIX_NAME
+FROM ${REG}/${PREFIX_NAME}java:1.8
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 RUN apk update && apk upgrade
 RUN apk add bash

@@ -1,4 +1,8 @@
-FROM fnproject/php
+ARG REG
+ARG PREFIX_NAME
+FROM ${REG}/${PREFIX_NAME}php
+ARG REPO_URL
+LABEL org.opencontainers.image.source ${REPO_URL}
 
 # php7-dev has a TON of packages, probably best for people to just add what they need. 
 # RUN apk update && apk upgrade \
